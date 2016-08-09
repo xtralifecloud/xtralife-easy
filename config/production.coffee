@@ -18,7 +18,7 @@ module.exports =
 	elastic: (cb)->
 		elastic = require("elasticsearch")
 		client = new elastic.Client
-			host: "http://elasticsearch:9200"
+			host: "http://elastic:9200"
 		cb null, client
 
 	mailer: nodemailer.createTransport(sendgrid(
