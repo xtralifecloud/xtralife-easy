@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  xtralife-server:
+    image: xtralife/xtralife-server:3.2
+    ports:
+     - "2000:2000"
+
+    volumes:
+     - ./config:/server/config
+     - ./logs:/server/logs
+
+    environment:
+      NODE_ENV: production
+
+    links:
+      - redis:redis
+      - mongodb:mongodb
+      - elastic:elastic
+
+  redis:
+    image: redis
+    volumes:
+      - ./data/redis:/data
+
+  mongodb:
+    image: mongo
+    volumes:
+     - ./data/db:/data/db
+     - ./data/configdb:/data/configdb
+
+  elastic:
+    image: elasticsearch
+    volumes:
+     - ./data/elastic:/usr/share/elasticsearch/data
