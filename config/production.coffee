@@ -10,7 +10,7 @@ module.exports =
 
 	redis:
 		host: "redis"
-		port: 9200
+		port: 6379
 
 	mongodb:
 		url: "mongodb://mongodb:27017/?maxPoolSize=25"

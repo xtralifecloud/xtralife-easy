@@ -1,6 +1,8 @@
 # Welcome to Xtralife-easy
 
-It will take 5 minutes (of which 4min of download time).
+It will take 5 minutes (of which 4min of download time). It only depends on your internet connection speed!
+
+## How to
 
 First run `git clone https://github.com/xtralifecloud/xtralife-easy.git` to clone this repository.
 
