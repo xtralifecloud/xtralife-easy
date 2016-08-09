@@ -18,6 +18,22 @@ services:
       - mongodb:mongodb
       - elastic:elastic
 
+  xtralife-dashboard:
+    image: xtralife/xtralife-dashboard:3.2
+    ports:
+     - "3000:3000"
+
+    volumes:
+     - ./configDashboard:/server/configDashboard
+
+    environment:
+      NODE_ENV: production
+
+    links:
+      - redis:redis
+      - mongodb:mongodb
+      - elastic:elastic
+
   redis:
     image: redis
     volumes:
