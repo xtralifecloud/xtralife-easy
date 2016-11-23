@@ -2,7 +2,7 @@ version: '2'
 
 services:
   xtralife-server:
-    image: xtralife/xtralife-server:3.2
+    image: xtralife/xtralife-server:latest
     ports:
      - "2000:2000"
 
@@ -19,7 +19,7 @@ services:
       - elastic:elastic
 
   xtralife-dashboard:
-    image: xtralife/xtralife-dashboard:3.2
+    image: xtralife/xtralife-dashboard:latest
     ports:
      - "3000:3000"
 
