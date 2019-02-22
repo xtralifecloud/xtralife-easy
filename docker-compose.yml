@@ -46,6 +46,6 @@ services:
      - ./data/configdb:/data/configdb
 
   elastic:
-    image: elasticsearch
+    image: elasticsearch:2
     volumes:
      - ./data/elastic:/usr/share/elasticsearch/data
