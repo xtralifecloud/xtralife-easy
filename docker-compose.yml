@@ -35,12 +35,12 @@ services:
       - elastic:elastic
 
   redis:
-    image: redis
+    image: redis:5
     volumes:
       - ./data/redis:/data
 
   mongodb:
-    image: mongo
+    image: mongo:4.1
     volumes:
      - ./data/db:/data/db
      - ./data/configdb:/data/configdb
