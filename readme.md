@@ -10,7 +10,7 @@ Next install Docker for your platform (Linux / Mac / Windows).
 
 Finally, run `docker-compose up -d`.
 
-(Tip: `-d` runs everythig in the backgroud. You can also try without it.) 
+(Tip: `-d` runs everything in the background. You can also try without it.) 
 
 ## Some more details
 
@@ -28,14 +28,14 @@ Docker will create two folders :
 - `./data` with all your data
 - `./logs` with the logs from xtralife-server
 
-In `./config/production.coffee` you'll find the configuration of the server, where you can configure things like
-your games keys, your iOS and Android certificates, and various options. `production.coffee` overrides settings in
-`default.coffee`... So you can also customize the options you see in `default.coffee`.
+In `./config/production.js` you'll find the configuration of the server, where you can configure things like
+your games keys, your iOS and Android certificates, and various options. `production.js` overrides settings in
+`default.js`... So you can also customize the options you see in `default.js`.
 
 In `./config/batches/` you'll find node.js Javascript module files. They are just examples of batch/hook files,
  to help you get started easily.
 
-In `./configDashboard/` you'll find another `production.coffee` file, for the dashboard. Use the same games descriptions
+In `./configDashboard/` you'll find another `production.js` file, for the dashboard. Use the same games descriptions
  as for xtralife-server.
  
 If you want to check if everything works fine, visit http://localhost:2000/v1/ping : the server should answer.
