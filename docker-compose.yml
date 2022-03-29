@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   xtralife-server:
-    image: xtralife/xtralife-server:v4.1.1
+    image: xtralife/xtralife-server:v4.1.3
     ports:
      - "2000:2000"
 

@@ -90,6 +90,11 @@ module.exports = (configuration = {
 			listen: true
 		},
 
+		redlock: {
+			timeout: 200,
+			overrideTimeoutViaParams: false
+		},
+
 		// this is the max number of recepients for an event
 		// it must be limited because of read/write amplification
 		maxReceptientsForEvent: 10,
