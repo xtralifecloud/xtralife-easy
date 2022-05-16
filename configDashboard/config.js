@@ -103,11 +103,11 @@ module.exports = {
 
 	AWS: {
 		S3: {
-			bucket: "CHANGE ME",
+			bucket: null,
+			region: null,
 			credentials: {
-				region: "CHANGE ME",
-				accessKeyId: "CHANGE ME",
-				secretAccessKey: "CHANGE ME"
+				accessKeyId: null,
+				secretAccessKey: null
 			}
 		}
 	},

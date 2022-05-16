@@ -38,11 +38,11 @@ module.exports = {
 
 	privateKey: "CONFIGURE : This is a private key and you should customize it",
 
-	AWS: { // CONFIGURE ACCESS TO YOUR AWS S3 BUCKET
+	AWS: {
 		S3: {
 			bucket: null,
+			region: null,
 			credentials: {
-				region: null,
 				accessKeyId: null,
 				secretAccessKey: null
 			}

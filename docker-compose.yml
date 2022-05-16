@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   xtralife-server:
-    image: xtralife/xtralife-server:v4.1.3
+    image: xtralife/xtralife-server:v4.2.2
     ports:
      - "2000:2000"
 
@@ -19,12 +19,12 @@ services:
       - elastic:elastic
 
   xtralife-dashboard:
-    image: xtralife/xtralife-dashboard:v4.1.1
+    image: xtralife/xtralife-dashboard:v4.1.8
     ports:
      - "3000:3000"
 
     volumes:
-     - ./configDashboard:/server/configDashboard
+     - ./configDashboard:/dashboard/configDashboard
 
     environment:
       NODE_ENV: production

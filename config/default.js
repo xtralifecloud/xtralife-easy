@@ -129,8 +129,8 @@ module.exports = (configuration = {
 	AWS: {
 		S3: {
 			bucket: null,
+			region: null,
 			credentials: {
-				region: null,
 				accessKeyId: null,
 				secretAccessKey: null
 			}

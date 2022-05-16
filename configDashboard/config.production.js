@@ -99,7 +99,12 @@ module.exports = {
 				games:["com.clanofthecloud.cloudbuilder","com.clanofthecloud.testgame"]
 			}
 		}
-	},	
+	},
+
+	options: {
+		title: "",
+		themeColor: "", // Hexadecimal values, examples : #131f8f #194320 #570530 #191919 #2D2424
+	},
 
 	mailer: {
 		transport: "sendgrid",
@@ -109,11 +114,11 @@ module.exports = {
 
 	AWS: {
 		S3: {
-			bucket: 'CONFIGURE',
+			bucket: null,
+			region: null,
 			credentials: {
-				region: '',
-				accessKeyId: '',
-				secretAccessKey: ''
+				accessKeyId: null,
+				secretAccessKey: null
 			}
 		}
 	},
