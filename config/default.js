@@ -1,14 +1,5 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
 let configuration;
-const os = require('os');
-const util = require('util');
 const xlenv = require("xtralife-env");
-const env = process.env.NODE_ENV || 'dev';
-
 const Promise = require('bluebird');
 Promise.promisifyAll(require('redis'));
 
@@ -69,9 +60,14 @@ module.exports = (configuration = {
 		}
 	},
 
-
 	mongoCx(cb){
 		return require("mongodb").MongoClient.connect(xlenv.mongodb.url, xlenv.mongodb.options, (err, mongodb) => cb(err, mongodb));
+	},
+
+	elastic(cb){
+		const elastic = require("elasticsearch");
+		const client = new elastic.Client(); // defaults to localhost
+		return cb(null, client);
 	},
 
 	options: {
@@ -94,12 +90,14 @@ module.exports = (configuration = {
 			timeout: 200,
 			overrideTimeoutViaParams: false
 		},
-
+		
 		// this is the max number of recepients for an event
 		// it must be limited because of read/write amplification
 		maxReceptientsForEvent: 10,
 
-		hostnameBlacklist: ['localhost', '127.0.0.1']
+		hostnameBlacklist: ['localhost', '127.0.0.1'],
+
+		gameCenterTokenMaxAge: 60 * 60 * 24 * 7, // 1 week (seconds)
 	},
 
 	metrics: {
@@ -126,7 +124,7 @@ module.exports = (configuration = {
 		games: {}
 	},
 
-	AWS: {
+	AWS: { // CONFIGURE ACCESS TO YOUR AWS S3 BUCKET
 		S3: {
 			bucket: null,
 			region: null,
@@ -138,16 +136,8 @@ module.exports = (configuration = {
 	},
 
 	hooks: {
-		definitions: {},
 		functions: { // CONFIGURE YOUR BATCHES / HOOKS for each domain
 			"youdomain.com": require('./batches/yourdomain.js')
 		}
 	},
-
-	elastic(cb){
-		const elastic = require("elasticsearch");
-		const client = new elastic.Client(); // defaults to localhost
-		client.sniff();
-		return cb(null, client);
-	}
 });

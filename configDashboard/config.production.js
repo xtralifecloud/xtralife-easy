@@ -1,10 +1,3 @@
-/*
- * decaffeinate suggestions:
- * DS102: Remove unnecessary code created because of implicit returns
- * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
- */
-const os = require('os');
-
 module.exports = {
 
 	redis: {
@@ -14,13 +7,6 @@ module.exports = {
 
 	mongodb: {
 		url: `mongodb://mongodb:27017/?maxPoolSize=25`
-	},
-
-	elastic(cb){
-		const elastic = require("elasticsearch");
-		const client = new elastic.Client({
-			host: `http://elastic:9200`});
-		return cb(null, client);
 	},
 
 	logs: {
@@ -36,26 +22,31 @@ module.exports = {
 					enable:true,
 					domains:[],
 					eventedDomains:[],
-					certs: {
-						android: {
-							enable: false,
-							senderID: '',
-							apikey: ''
-						},
-						ios: {
-							enable: false,
-							cert: '',
-							key: ''
-						},
-						macos: {
-							enable: false,
-							cert: '',
-							key: ''
+
+					apple: { // see apple developer console
+						bundleID: '', // for apn
+						apn: { //apple push notification
+							token: { // apn auth key
+								key: "",
+								keyId: "",
+								teamId: "",
+							},
+							production: false,
 						}
 					},
-					socialSettings: {
-						facebookAppToken : ''
-					}
+
+					firebase: { // push Android (firebaseAdmin sdk), see firebase console
+						type: "",
+						project_id: "",
+						private_key_id: "",
+						private_key: "",
+						client_email: "",
+						client_id: "",
+						auth_uri: "",
+						token_uri: "",
+						auth_provider_x509_cert_url: "",
+						client_x509_cert_url: ""
+					},
 				}
 			},
 
@@ -66,26 +57,31 @@ module.exports = {
 					enable:true,
 					domains:["com.clanofthecloud.cloudbuilder.m3Nsd85GNQd3","com.clanofthecloud.cloudbuilder.test"],
 					eventedDomains:["com.clanofthecloud.cloudbuilder.m3Nsd85GNQd3"],
-					certs: {
-						android: {
-							enable: true,
-							senderID: '',
-							apikey: ''
-						},
-						ios: {
-							enable: true,
-							cert: '',
-							key: ''
-						},
-						macos: {
-							enable: true,
-							cert: '',
-							key:''
+
+					apple: { // see apple developer console
+						bundleID: '', // for apn
+						apn: { //apple push notification
+							token: { // apn auth key
+								key: "",
+								keyId: "",
+								teamId: "",
+							},
+							production: false,
 						}
 					},
-					socialSettings: {
-						facebookAppToken : ''
-					}
+
+					firebase: { // push Android (firebaseAdmin sdk), see firebase console
+						type: "",
+						project_id: "",
+						private_key_id: "",
+						private_key: "",
+						client_email: "",
+						client_id: "",
+						auth_uri: "",
+						token_uri: "",
+						auth_provider_x509_cert_url: "",
+						client_x509_cert_url: ""
+					},
 				}
 			}
 		}
@@ -106,51 +102,15 @@ module.exports = {
 		themeColor: "", // Hexadecimal values, examples : #131f8f #194320 #570530 #191919 #2D2424
 	},
 
-	mailer: {
-		transport: "sendgrid",
-		user: "",
-		password: ""
-	},
-
 	AWS: {
 		S3: {
-			bucket: null,
-			region: null,
+			bucket: "",
+			region: "",
 			credentials: {
-				accessKeyId: null,
-				secretAccessKey: null
+				accessKeyId: "",
+				secretAccessKey: ""
 			}
 		}
 	},
-
-	hooks: {
-		recursionLimit: 5,
-		definitions: {
-			"com.clanofthecloud.cloudbuilder.m3Nsd85GNQd3": { // needed for unit tests
-				'before-gamervfs-write': "return 'before';",
-				'after-gamervfs-write':  `  if (customData != 'before') { throw new Error('Hook context lost'); }; \
-return this.virtualfs.read('com.clanofthecloud.cloudbuilder.m3Nsd85GNQd3', params.user_id, null) \
-.then(function(allkeys) \
-{return 'DONE!';});`
-			},
-			"com.clanofthecloud.cloudbuilder.azerty": { // needed for unit tests
-				'social-addprofile' : "return this.virtualfs.readmulti(params.domain, params.userids, ['key1', 'key2'], ['properties','balance']);",
-				'before-transaction': "console.log('Before transaction');",
-				'after-transaction': "console.log('After transaction');",
-				'before-balance': "return null;",
-				'__test1': "return {input: params.request.input, domain: this.game.getPrivateDomain()};",
-				'__test2': "return {userFound: params.user_id};",
-				'__test3': `var domain = this.game.getPrivateDomain(); \
-return mod.Q.all( \
-[this.virtualfs.read(domain, params.user_id, null), \
-this.tx.balance(domain, params.user_id)] \
-).spread(function (fs, balance) { \
-return {fs: fs, balance: balance}; \
-});`
-			}
-		},
-
-		functions: {}
-	}
 };
 
