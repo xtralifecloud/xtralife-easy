@@ -19,7 +19,7 @@ services:
       - elastic:elastic
 
   xtralife-dashboard:
-    image: xtralife/xtralife-dashboard:v4.1.9
+    image: xtralife/xtralife-dashboard:v4.1.12
     ports:
      - "3000:3000"
 

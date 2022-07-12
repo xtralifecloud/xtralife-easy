@@ -1,5 +1,4 @@
 let configuration;
-const xlenv = require("xtralife-env");
 const Promise = require('bluebird');
 Promise.promisifyAll(require('redis'));
 
