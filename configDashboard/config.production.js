@@ -1,8 +1,10 @@
 module.exports = {
 
 	redis: {
-		host: "redis",
-		port: 6379
+		config: {
+			host: "redis",
+			port: 6379
+		}
 	},
 
 	mongodb: {

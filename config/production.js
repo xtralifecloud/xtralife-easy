@@ -9,8 +9,10 @@ module.exports = {
 	},
 
 	redis: {
-		host: "redis",
-		port: 6379
+		config: {
+			host: "redis",
+			port: 6379
+		}
 	},
 
 	mongodb: {
@@ -18,9 +20,10 @@ module.exports = {
 	},
 
 	elastic(cb){
-		const elastic = require("elasticsearch");
-		const client = new elastic.Client({
-			host: `http://elastic:9200`});
+		const { Client } = require('@elastic/elasticsearch')
+		const client = new Client({
+			node: 'http://elastic:9200',
+		})
 		return cb(null, client);
 	},
 

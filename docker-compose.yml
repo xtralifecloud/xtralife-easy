@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   xtralife-server:
-    image: xtralife/xtralife-server:v4.2.3
+    image: xtralife/xtralife-server:v4.2.4
     ports:
      - "2000:2000"
 
@@ -19,7 +19,7 @@ services:
       - elastic:elastic
 
   xtralife-dashboard:
-    image: xtralife/xtralife-dashboard:v4.1.12
+    image: xtralife/xtralife-dashboard:v4.1.14
     ports:
      - "3000:3000"
 
@@ -35,7 +35,7 @@ services:
       - elastic:elastic
 
   redis:
-    image: redis
+    image: redis:7
     volumes:
       - ./data/redis:/data
 
@@ -46,6 +46,6 @@ services:
      - ./data/configdb:/data/configdb
 
   elastic:
-    image: elasticsearch:2
+    image: elasticsearch:5
     volumes:
      - ./data/elastic:/usr/share/elasticsearch/data

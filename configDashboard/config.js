@@ -1,21 +1,24 @@
-const Q = require('bluebird');
-Q.promisifyAll(require('redis'));
+const Redis = require("ioredis");
 
 module.exports = {
 	context: "dashboard",
 
 	redis: {
-		port : 6379,
-		host : 'localhost'
+		config: {
+			port : 6379,
+			host : 'localhost'
+		}
 	},
 
 	redisClientSync(){
-		return require('redis').createClient(xlenv.redis.port, xlenv.redis.host);
+		return new Redis(xlenv.redis.config);
 	},
 
 	redisClient(cb){
-		const client = require('redis').createClient(xlenv.redis.port, xlenv.redis.host);
-		return client.info(err => cb(err, client));
+		const redis = new Redis(xlenv.redis.config);
+		redis.info((err) => {
+			return cb(err, redis);
+		})
 	},
 
 	mongodb: {

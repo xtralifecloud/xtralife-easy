@@ -1,6 +1,5 @@
 let configuration;
-const Promise = require('bluebird');
-Promise.promisifyAll(require('redis'));
+const Redis = require('ioredis');
 
 module.exports = (configuration = {
 	nbworkers : 0, // 0 means one worker per CPU
@@ -26,26 +25,31 @@ module.exports = (configuration = {
 	},
 
 	redis: {
-		port : null,
-		host : null
+		config: {
+			host: null,
+			port: null
+		}
 	},
 
 	redisClient(cb){
-		const client = require('redis').createClient(xlenv.redis.port, xlenv.redis.host);
-		return client.info(err => cb(err, client));
+		const redis = new Redis(xlenv.redis.config);
+		redis.info((err) => {
+			return cb(err, redis);
+		})
 	},
 
 	redisChannel(cb){
-		const client = require('redis').createClient(xlenv.redis.port, xlenv.redis.host);
-		return client.info(err => cb(err, client));
+		const redis = new Redis(xlenv.redis.config);
+		redis.info((err) => {
+			return cb(err, redis);
+		})
 	},
 
 	redisStats(cb){
-		const client = require('redis').createClient(xlenv.redis.port, xlenv.redis.host);
-		return client.info(function(err){
-			client.select(10);
-			return cb(err, client);
-		});
+		const redis = new Redis(xlenv.redis.config);
+		redis.info((err) => {
+			return cb(err, redis);
+		})
 	},
 
 	mongodb: {
@@ -64,8 +68,10 @@ module.exports = (configuration = {
 	},
 
 	elastic(cb){
-		const elastic = require("elasticsearch");
-		const client = new elastic.Client(); // defaults to localhost
+		const { Client } = require('@elastic/elasticsearch')
+		const client = new Client({
+			node: 'http://localhost:9200',
+		})
 		return cb(null, client);
 	},
 

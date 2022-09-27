@@ -1,8 +1,10 @@
 module.exports = {
 
 	redis: {
-		host: "localhost", 	// tunnel ssh forwarded to db1
-		port: 6378
+		config: {
+			host: "localhost", 	// tunnel ssh forwarded to db1
+			port: 6378
+		}
 	}, 			// tunnel ssh port
 
 	mongodb: {

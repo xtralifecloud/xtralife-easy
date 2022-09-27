@@ -9,8 +9,10 @@ module.exports = {
 	},
 
 	redis: {
-		host: "localhost",
-		port: 6378
+		config: {
+			host: "localhost",
+			port: 6378
+		}
 	},
 
 	mongodb: {
@@ -18,10 +20,13 @@ module.exports = {
 	},
 
 	elastic(cb){
-		const elastic = require("elasticsearch");
-		const client = new elastic.Client();
+		const { Client } = require('@elastic/elasticsearch')
+		const client = new Client({
+			node: 'http://localhost:9200',
+		})
 		return cb(null, client);
 	},
+
 
 	mailer: nodemailer.createTransport(sendgrid({
 		auth: { // CONFIGURE ACCESS TO SENDGRID
