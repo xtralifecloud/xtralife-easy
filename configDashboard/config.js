@@ -27,13 +27,16 @@ module.exports = {
 			w: 1,
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
-			promiseLibrary: require('bluebird'),
 			readPreference: "primaryPreferred",
 		}
 	},
 
-	mongoCx(cb){
-		return require("mongodb").MongoClient.connect(xlenv.mongodb.url, xlenv.mongodb.options, cb);
+	mongoCx(cb) {
+		const { MongoClient } = require('mongodb');
+		const client = new MongoClient(xlenv.mongodb.url, xlenv.mongodb.options);
+		return client.connect()
+			.then(() => cb(null, client))
+			.catch(err => cb(err));
 	},
 
 	http: {

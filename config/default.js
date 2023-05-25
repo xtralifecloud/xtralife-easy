@@ -58,13 +58,16 @@ module.exports = (configuration = {
 		options: { // see http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html
 			w: 1,
 			readPreference: "primaryPreferred",
-			promiseLibrary: require('bluebird'),
 			useUnifiedTopology: true
 		}
 	},
 
-	mongoCx(cb){
-		return require("mongodb").MongoClient.connect(xlenv.mongodb.url, xlenv.mongodb.options, (err, mongodb) => cb(err, mongodb));
+	mongoCx(cb) {
+		const { MongoClient } = require('mongodb');
+		const client = new MongoClient(xlenv.mongodb.url, xlenv.mongodb.options);
+		return client.connect()
+			.then(() => cb(null, client))
+			.catch(err => cb(err));
 	},
 
 	elastic(cb){
