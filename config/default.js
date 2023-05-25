@@ -67,7 +67,13 @@ module.exports = (configuration = {
 		return require("mongodb").MongoClient.connect(xlenv.mongodb.url, xlenv.mongodb.options, (err, mongodb) => cb(err, mongodb));
 	},
 
-	elastic(cb){
+	elastic: {
+		driver: {
+			version: "8.7.0",
+		}
+	},
+
+	elasticClient(cb){
 		const { Client } = require('@elastic/elasticsearch')
 		const client = new Client({
 			node: 'http://localhost:9200',
