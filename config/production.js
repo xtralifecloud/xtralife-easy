@@ -19,13 +19,7 @@ module.exports = {
 		url: `mongodb://mongodb:27017/?maxPoolSize=25`
 	},
 
-	elastic: {
-		driver: {
-			version: "8.7.0",
-		}
-	},
-
-	elasticClient(cb){
+	elastic(cb){
 		const { Client } = require('@elastic/elasticsearch')
 		const client = new Client({
 			node: 'http://elastic:9200',

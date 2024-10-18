@@ -19,20 +19,13 @@ module.exports = {
 		url: "mongodb://localhost:27018/?maxPoolSize=5"
 	},
 
-	elastic: {
-		driver: {
-			version: "8.7.0",
-		}
-	},
-
-	elasticClient(cb){
+	elastic(cb){
 		const { Client } = require('@elastic/elasticsearch')
 		const client = new Client({
 			node: 'http://localhost:9200',
 		})
 		return cb(null, client);
 	},
-
 
 	mailer: nodemailer.createTransport(sendgrid({
 		auth: { // CONFIGURE ACCESS TO SENDGRID
